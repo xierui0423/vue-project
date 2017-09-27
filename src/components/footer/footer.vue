@@ -4,21 +4,6 @@
     </div>
 </template>
 
-<script>
-  import logo from './logo.png';
-
-  export default{
-    data () {
-      return{
-        backgroundImage: `url('${logo}')`
-      };
-    },
-    props: {
-      // ...
-    }
-  };
-</script>
-
 <style rel="stylesheet/scss" lang="sass">
     $primary-color: #d33;
 
@@ -35,3 +20,20 @@
         }
     }
 </style>
+
+<script>
+  import logo from './logo.png';
+
+  export default{
+    data () {
+      return{
+        backgroundImage: `url('${logo}')`
+      };
+    },
+    props: {
+      // ...
+    }
+  };
+</script>
+
+\

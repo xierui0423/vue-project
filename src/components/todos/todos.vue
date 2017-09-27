@@ -1,15 +1,24 @@
 <template>
-    <div>
-        <input type="text" v-model="$data.__input" @keyup.enter="handleAddTodo" @input="__handleInput"/>
+  <div class="todos">
 
-        <ul>
-            <li v-for="(todo, index) in todos" :id="todo.id">{{todo.name}}
-                <button @click="handleRemoveTodo">remove</button>
-                <input :value="todo.input" type="text" @keyup.enter="handleEditTodo" @input="handleInputEdit"/>
-            </li>
-        </ul>
-    </div>
+    <input class="todos__input" type="text" v-model="$data.__input" @keyup.enter="handleAddTodo"
+           @input="__handleInput"/>
+
+    <ul class="todos__list" v-if="todos.length">
+      <li class="todos__todo" v-for="(todo, index) in todos" :data-todo-id="todo.id">
+        <label :for="`todo-input-${todo.id}`">{{todo.name}}</label>
+        <input :id="`todo-input-${todo.id}`" class="todos__todo-input" :value="todo.input" type="text"
+               @keyup.enter="handleEditTodo" @input="handleInputEdit"/>
+        <button class="todos__todo-remove-btn" @click="handleRemoveTodo">remove</button>
+      </li>
+    </ul>
+
+  </div>
 </template>
+
+<style rel="stylesheet/scss" lang="sass">
+
+</style>
 
 <script>
   import {mapState, mapMutations, mapActions} from 'vuex';
@@ -42,11 +51,11 @@
       },
 
       handleEditTodo(e){
-        this['UPDATE_TODO']({name: e.target.value, id: parseInt($(e.target).parent('li').attr('id'))});
+        this['UPDATE_TODO']({name: e.target.value, id: parseInt($(e.target).parent('li').data('todo-id'))});
       },
 
       handleInputEdit(e){
-        this['UPDATE_TODO']({input: e.target.value, id: parseInt($(e.target).parent('li').attr('id'))});
+        this['UPDATE_TODO']({input: e.target.value, id: parseInt($(e.target).parent('li').data('todo-id'))});
       },
 
       __handleInput(e){
